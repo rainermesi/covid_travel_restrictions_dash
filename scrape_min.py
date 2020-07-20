@@ -22,7 +22,8 @@ for i in countries:
         data_dict['metric'].append(elem.text_content().split()[1])
 
 data_df = pd.DataFrame.from_dict(data_dict)
-
+data_df['load_dt'] = pd.to_datetime('today')
 data_df.head()
+data_df.info()
 
-data_df.to_csv(r'C:\Users\rainmes\OneDrive - Telia Company\Documents\1707_fmin.csv')
+data_df.to_csv(r'C:\Users\raine\Documents\My Git Repositories\covid_travel_satus\2007_fmin.csv')
