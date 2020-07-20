@@ -18,8 +18,14 @@ data_dict = {
 
 for i in countries:
     for elem in i:
-        data_dict['country'].append(elem.text_content().split()[0])
-        data_dict['metric'].append(elem.text_content().split()[1])
+        #last element of the split
+        temp_slc = len(elem.text_content().split())-1
+        if len(elem.text_content().split()) > 2:
+            data_dict['country'].append(elem.text_content().split()[0]+' '+elem.text_content().split()[1])
+            data_dict['metric'].append(elem.text_content().split()[temp_slc])
+        else:
+            data_dict['country'].append(elem.text_content().split()[0])
+            data_dict['metric'].append(elem.text_content().split()[temp_slc])
 
 data_df = pd.DataFrame.from_dict(data_dict)
 data_df['load_dt'] = pd.to_datetime('today')
