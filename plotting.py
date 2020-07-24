@@ -62,5 +62,7 @@ y='metric',
 range_x=['2020-07-10','2020-07-21'],
 facet_row='country',
 height=4200,
-facet_row_spacing=0.01) 
+facet_row_spacing=0.01,
+) 
+fig_lc.update_yaxes(matches=None)
 fig_lc.show()
