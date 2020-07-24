@@ -42,6 +42,25 @@ df = df.sort_values('metric',ascending=True)
 #keep only necessary columns
 df = df[['country','metric','load_dt']]
 
+#optional subset of 5 countries
+sub = df['country'].isin(['Austria','Belgia','Bulgaaria','Hispaania','Holland'])
+
+df_s = df[sub]
+
+#normalize datetimes (this needs to be preprocessed)
+df_s['load_dt'] = pd.to_datetime(df_s['load_dt']).dt.normalize()
+df['load_dt'] = pd.to_datetime(df['load_dt']).dt.normalize()
+
+
 #plot barchart
-fig = px.bar(df,x='country',y='metric')
-fig.show()
+fig_bc = px.bar(df,x='country',y='metric')
+fig_bc.show()
+
+#plot faceted linechart
+fig_lc = px.line(df,x='load_dt',
+y='metric',
+range_x=['2020-07-10','2020-07-21'],
+facet_row='country',
+height=4200,
+facet_row_spacing=0.01) 
+fig_lc.show()
