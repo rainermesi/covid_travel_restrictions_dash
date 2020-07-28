@@ -25,7 +25,6 @@ def clean_data(data):
 def get_data(x):
     page = requests.get(x)
     tree = html.fromstring(page.content)
-    update_dt = tree.xpath('//*[@id="node-article-53150"]/div[1]/div/div/div/h3[2]')
     countries = tree.xpath('//*[@id="node-article-53150"]/div[1]/div/div/div/ul[3]')
     for i in countries:
         for elem in i:
