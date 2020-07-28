@@ -66,3 +66,16 @@ facet_row_spacing=0.01,
 ) 
 fig_lc.update_yaxes(matches=None)
 fig_lc.show()
+
+#try out a faceted line chart
+
+df = pd.read_csv('union_001.csv')
+
+fig = px.line(df, x='load_dt', y='metric', facet_col='country', facet_col_wrap = 7,
+            facet_row_spacing = 0.04,
+            facet_col_spacing = 0.04,
+            height=600,width=800,
+            title='Corona travel index in Europe')
+fig.for_each_annotation(lambda a: a.update(text=a.text.split('=')[-1]))
+fig.update_yaxes(showticklabels=True)
+fig.show()
