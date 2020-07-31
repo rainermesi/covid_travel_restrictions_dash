@@ -59,23 +59,12 @@ fig_bc.show()
 #plot faceted linechart
 fig_lc = px.line(df,x='load_dt',
 y='metric',
-range_x=['2020-07-10','2020-07-21'],
+facet_col='country',
+facet_col_wrap=6,
 facet_row='country',
-height=4200,
-facet_row_spacing=0.01,
+#range_x=['2020-07-10','2020-07-21'],
+height=2200,
+facet_row_spacing=0.01
 ) 
 fig_lc.update_yaxes(matches=None)
 fig_lc.show()
-
-#try out a faceted line chart
-
-df = pd.read_csv('union_001.csv')
-
-fig = px.line(df, x='load_dt', y='metric', facet_col='country', facet_col_wrap = 7,
-            facet_row_spacing = 0.04,
-            facet_col_spacing = 0.04,
-            height=600,width=800,
-            title='Corona travel index in Europe')
-fig.for_each_annotation(lambda a: a.update(text=a.text.split('=')[-1]))
-fig.update_yaxes(showticklabels=True)
-fig.show()
