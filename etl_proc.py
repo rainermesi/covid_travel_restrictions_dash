@@ -12,3 +12,7 @@ def clean_data(data):
     pd.concat([pd.read_csv('union_001.csv'),temp_df])[['country','metric','load_dt']].to_csv('union_001.csv',index=False)
 
 clean_data(curr_fn)
+
+temp_df = pd.read_csv('union_001.csv')
+
+len(temp_df.country.unique())
