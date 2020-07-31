@@ -1,6 +1,19 @@
 import plotly.express as px
-df = px.data.tips()
-fig = px.sunburst(df, path=['day', 'time', 'sex'], values='total_bill')
+import pandas as pd
+df = pd.read_csv('/home/rainermesi/Documents/f_min_scrape/union_001.csv')
+df = df[df['load_dt'] == (max(df['load_dt']))]
+df = df.sort_values('metric',ascending=True)
+fig_bc = px.bar(df,x='country',y='metric')
+
+fig_lc = px.line(df,x='load_dt',
+y='metric',
+facet_col='country',
+facet_col_wrap=6,
+facet_row='country',
+height=2200,
+facet_row_spacing=0.01
+) 
+fig_lc.update_yaxes(matches=None)
 
 import dash
 import dash_core_components as dcc
@@ -18,7 +31,7 @@ app.layout = html.Div(
     '''),
 
     html.Div(
-    dcc.Graph(id='i',figure=fig)
+    dcc.Graph(id='i',figure=fig_bc)
 )
 ]
 )
