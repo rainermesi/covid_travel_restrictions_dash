@@ -68,3 +68,16 @@ facet_row_spacing=0.01
 ) 
 fig_lc.update_yaxes(matches=None)
 fig_lc.show()
+
+df_iso_cd = pd.read_csv('country_cd_iso.csv',delimiter=';')
+df_metrics = pd.read_csv('union_001.csv')
+df_metrics = df_metrics[df_metrics['load_dt'] == (max(df_metrics['load_dt']))]
+
+df_merged = pd.merge(df_metrics,df_iso_cd,how='left',on='country')
+
+fig = px.choropleth(df_merged,locations='iso_cd',
+                    color='metric',
+                    hover_name='country',
+                    color_continuous_scale=px.colors.sequential.Plasma)
+
+fig.show()
