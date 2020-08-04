@@ -78,6 +78,10 @@ df_merged = pd.merge(df_metrics,df_iso_cd,how='left',on='country')
 fig = px.choropleth(df_merged,locations='iso_cd',
                     color='metric',
                     hover_name='country',
-                    color_continuous_scale=px.colors.sequential.Plasma)
+                    scope='europe',
+                    height=600,
+                    width=800,
+                    range_color=(0,43),
+                    color_continuous_scale=px.colors.sequential.Peach)
 
 fig.show()
